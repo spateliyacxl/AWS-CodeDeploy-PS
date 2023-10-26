@@ -18,6 +18,8 @@ if ( $env:DEPLOYMENT_GROUP_NAME -imatch "on-prem-deployment-2") {
     $AppDirectory = "C:\WorkspaceforLegacyBridgeApp\apache-tomcat-dev\webapps"
     
     Get-ChildItem -Path $AppDirectory -Recurse | Where-Object { $_.Name -like 'OutboundEmailLegacyBridge*' } | Remove-Item -Recurse -Force
+    
+    Remove-Item "C:\WorkspaceforLegacyBridgeApp\Artifacts\OutboundEmailLegacyBridge.war" -Recurse -Force -Confirm:$false
 
 }
 
