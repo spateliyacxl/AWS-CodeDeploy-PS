@@ -1,0 +1,12 @@
+version: 0.0
+os: windows
+files:
+  - source: /OutboundEmailLegacyBridge.war
+    destination: C:\WorkspaceforLegacyBridgeApp\Artifacts
+hooks:
+  BeforeInstall:
+    - location: scripts/BeforeInstall.ps1
+      runas: Administrator
+  AfterInstall:
+    - location: scripts/AfterInstall.ps1
+      runas: Administrator
