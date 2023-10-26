@@ -3,7 +3,7 @@
 
 Start-Transcript -Path C:\WorkspaceforLegacyBridgeApp\Code_Deployment.log -Append
 
-Write-Host "DEPLOYMENT_GROUP_NAME = $env:DEPLOYMENT_GROUP_NAME"
+Write-Host " Before Instal Script Executing on $env:DEPLOYMENT_GROUP_NAME"
 
 if ( $env:DEPLOYMENT_GROUP_NAME -imatch "on-prem-deployment-2") {
 
@@ -18,13 +18,12 @@ if ( $env:DEPLOYMENT_GROUP_NAME -imatch "on-prem-deployment-2") {
     $AppDirectory = "C:\WorkspaceforLegacyBridgeApp\apache-tomcat-dev\webapps"
     
     Get-ChildItem -Path $AppDirectory -Recurse | Where-Object { $_.Name -like 'OutboundEmailLegacyBridge*' } | Remove-Item -Recurse -Force
-    
+
+    Write-Host "Removing Artifacts Before Downloading Latest Build"
     Remove-Item "C:\WorkspaceforLegacyBridgeApp\Artifacts\OutboundEmailLegacyBridge.war" -Recurse -Force -Confirm:$false
 
 }
 
-
-Write-Host "DEPLOYMENT_GROUP_NAME = $env:DEPLOYMENT_GROUP_NAME"
 
 if ( $env:DEPLOYMENT_GROUP_NAME -imatch "fp-ss-fm-eo-outboundemail-legacyBridge-deployment-group-qa") {
 
@@ -39,6 +38,9 @@ if ( $env:DEPLOYMENT_GROUP_NAME -imatch "fp-ss-fm-eo-outboundemail-legacyBridge-
     $AppDirectory = "C:\WorkspaceforLegacyBridgeApp\apache-tomcat-qa\webapps"
     
     Get-ChildItem -Path $AppDirectory -Recurse | Where-Object { $_.Name -like 'OutboundEmailLegacyBridge*' } | Remove-Item -Recurse -Force
+
+    Write-Host "Removing Artifacts Before Downloading Latest Build"
+    Remove-Item "C:\WorkspaceforLegacyBridgeApp\Artifacts\OutboundEmailLegacyBridge.war" -Recurse -Force -Confirm:$false
 
 }
 
